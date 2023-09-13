@@ -10,7 +10,7 @@ function useQuery() {
 const VerifyPage = () => {
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
-    const { isLoading } = useGlobalContext();
+    const { isLoading } = useGlobalContext()?.isLoading;
     const query = useQuery();
 
     const verifyToken = async () => {
@@ -20,6 +20,7 @@ const VerifyPage = () => {
                 verificationToken: query.get("token"),
                 email: query.get("email"),
             });
+            console.log(data);
         } catch (error) {
             // console.log(error.response);
             setError(true);

@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import main from "../assets/main.svg";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useGlobalContext } from "../context";
 function Home() {
     const { user } = useGlobalContext();
     return (
         <>
-            {user && <Redirect to='/dashboard' />}
+            {user && <Navigate to='/dashboard' />}
             <Wrapper className='page'>
                 <div className='info'>
                     <h2>
@@ -15,16 +15,17 @@ function Home() {
                         Workflow
                     </h2>
                     <p>
-                        I'm baby viral enamel pin chartreuse cliche retro af
-                        selfies kinfolk photo booth plaid jianbing actually
-                        squid 3 wolf moon lumbersexual. Hell of humblebrag
-                        gluten-free lo-fi man braid leggings.
+                        I'm baby viral enamel pin Pellentesque eu tincidunt
+                        tortor aliquam nulla facilisi cras fermentum. Quis enim
+                        lobortis scelerisque fermentum dui. Eget nulla facilisi
+                        etiam dignissim diam quis.
                     </p>
                     <p>
-                        Cloud bread kale chips wayfarers deep v chicharrones
-                        leggings fingerstache actually blog cliche four dollar
-                        toast. Sriracha ugh kickstarter, next level la croix
-                        butcher lomo.
+                        Cloud bread kale chips wayfarers Elementum pulvinar
+                        etiam non quam lacus suspendisse faucibus. Fames ac
+                        turpis egestas maecenas. Elit ullamcorper dignissim cras
+                        tincidunt lobortis. Senectus et netus et malesuada fames
+                        ac turpis.
                     </p>
 
                     <Link to='/login' className='btn'>

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { Link, useHistory, Redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormRow from "../components/FormRow";
 import { useGlobalContext } from "../context";
 import useLocalState from "../utils/localState";
@@ -9,7 +9,7 @@ import axios from "axios";
 
 function Login() {
     const { saveUser } = useGlobalContext();
-    const history = useHistory();
+    const history = useNavigate();
     const [values, setValues] = useState({
         email: "",
         password: "",
@@ -30,7 +30,7 @@ function Login() {
             const { data } = await axios.post(`/api/v1/auth/login`, loginUser);
             setValues({ name: "", email: "", password: "" });
             showAlert({
-                text: `Welcome, ${data.user.name}. Redirecting to dashboard...`,
+                text: `Welcome, ${data.user.name}. Navigating to dashboard...`,
                 type: "success",
             });
             setLoading(false);
