@@ -2,6 +2,7 @@ const User = require('../models/User');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../errors');
 const { attachCookiesToResponse, createTokenUser } = require('../utils');
+const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
 
 const register = async (req, res) => {
@@ -24,10 +25,10 @@ const register = async (req, res) => {
         role,
         verificationToken,
     });
+    await sendEmail();
     // send verification token only in postman
     res.status(StatusCodes.CREATED).json({
         msg: 'Success, check email to verify account',
-        verificationToken: user.verificationToken,
     });
 };
 
