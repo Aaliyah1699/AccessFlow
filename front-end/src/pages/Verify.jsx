@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
-import styled from "styled-components";
-import { useGlobalContext } from "../context";
-import axios from "axios";
+import { useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { useGlobalContext } from '../context';
+import axios from 'axios';
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
@@ -10,15 +10,15 @@ function useQuery() {
 const VerifyPage = () => {
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
-    const { isLoading } = useGlobalContext()?.isLoading;
+    const { isLoading } = useGlobalContext();
     const query = useQuery();
 
     const verifyToken = async () => {
         setLoading(true);
         try {
-            const { data } = await axios.post("/api/v1/auth/verify-email", {
-                verificationToken: query.get("token"),
-                email: query.get("email"),
+            const { data } = await axios.post('/api/v1/auth/verify-email', {
+                verificationToken: query.get('token'),
+                email: query.get('email'),
             });
             console.log(data);
         } catch (error) {
@@ -47,7 +47,7 @@ const VerifyPage = () => {
             <Wrapper className='page'>
                 <h4>
                     There was an error, please double check your verification
-                    link{" "}
+                    link{' '}
                 </h4>
             </Wrapper>
         );

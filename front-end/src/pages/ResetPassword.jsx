@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import axios from "axios";
-import FormRow from "../components/FormRow";
-import useLocalState from "../utils/localState";
+/* eslint-disable no-unused-vars */
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import axios from 'axios';
+import FormRow from '../components/FormRow';
+import useLocalState from '../utils/localState';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -11,7 +12,7 @@ function useQuery() {
 
 const ResetPasswordForm = () => {
     const history = useNavigate();
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState('');
     const { alert, showAlert, loading, setLoading, success, setSuccess } =
         useLocalState();
 
@@ -24,24 +25,24 @@ const ResetPasswordForm = () => {
         e.preventDefault();
         setLoading(true);
         if (!password) {
-            showAlert({ text: "please enter password" });
+            showAlert({ text: 'please enter password' });
             setLoading(false);
             return;
         }
         try {
-            const { data } = await axios.post("/api/v1/auth/reset-password", {
+            const { data } = await axios.post('/api/v1/auth/reset-password', {
                 password,
-                token: query.get("token"),
-                email: query.get("email"),
+                token: query.get('token'),
+                email: query.get('email'),
             });
             setLoading(false);
             setSuccess(true);
             showAlert({
                 text: `Success, redirecting to login page shortly`,
-                type: "success",
+                type: 'success',
             });
             setTimeout(() => {
-                history.push("/login");
+                history.push('/login');
             }, 3000);
         } catch (error) {
             showAlert({ text: error.response.data.msg });
@@ -55,7 +56,7 @@ const ResetPasswordForm = () => {
             )}
             {!success && (
                 <form
-                    className={loading ? "form form-loading" : "form"}
+                    className={loading ? 'form form-loading' : 'form'}
                     onSubmit={handleSubmit}
                 >
                     <h4>reset password</h4>
@@ -72,7 +73,7 @@ const ResetPasswordForm = () => {
                         className='btn btn-block'
                         disabled={loading}
                     >
-                        {loading ? "Please Wait..." : "New Password"}
+                        {loading ? 'Please Wait...' : 'New Password'}
                     </button>
                 </form>
             )}

@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import main from "../assets/main.svg";
-import { Navigate } from "react-router-dom";
-import { useGlobalContext } from "../context";
+/* eslint-disable react/no-unescaped-entities */
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import main from '../assets/main.svg';
+import { Navigate } from 'react-router-dom';
+import { useGlobalContext } from '../context';
 function Home() {
     const { user } = useGlobalContext();
     return (

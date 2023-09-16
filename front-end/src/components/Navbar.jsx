@@ -1,8 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import logo from "../assets/logo.svg";
-import { Link } from "react-router-dom";
-import { useGlobalContext } from "../context";
+import styled from 'styled-components';
+import logo from '../assets/logo.svg';
+import { Link } from 'react-router-dom';
+import { useGlobalContext } from '../context';
 
 const Navbar = () => {
     const { user, logoutUser } = useGlobalContext();

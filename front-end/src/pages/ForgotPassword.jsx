@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import FormRow from "../components/FormRow";
-import axios from "axios";
-import useLocalState from "../utils/localState";
+import { useState } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import FormRow from '../components/FormRow';
+import axios from 'axios';
+import useLocalState from '../utils/localState';
 
 const ForgotPassword = () => {
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState('');
     const {
         alert,
         showAlert,
@@ -27,20 +27,20 @@ const ForgotPassword = () => {
         hideAlert();
         if (!email) {
             showAlert({
-                text: "Please provide email",
+                text: 'Please provide email',
             });
             setLoading(false);
             return;
         }
         try {
-            const { data } = await axios.post("/api/v1/auth/forgot-password", {
+            const { data } = await axios.post('/api/v1/auth/forgot-password', {
                 email,
             });
-            showAlert({ text: data.msg, type: "success" });
+            showAlert({ text: data.msg, type: 'success' });
             setSuccess(true);
         } catch (error) {
             showAlert({
-                text: "Something went wrong, please try again",
+                text: 'Something went wrong, please try again',
             });
             setSuccess(true);
         }
@@ -53,7 +53,7 @@ const ForgotPassword = () => {
             )}
             {!success && (
                 <form
-                    className={loading ? "form form-loading" : "form"}
+                    className={loading ? 'form form-loading' : 'form'}
                     onSubmit={handleSubmit}
                 >
                     <h4>Forgot password</h4>
@@ -70,7 +70,7 @@ const ForgotPassword = () => {
                         className='btn btn-block'
                         disabled={loading}
                     >
-                        {loading ? "Please Wait..." : "Get Reset Password Link"}
+                        {loading ? 'Please Wait...' : 'Get Reset Password Link'}
                     </button>
                     <p>
                         Already a have an account?
