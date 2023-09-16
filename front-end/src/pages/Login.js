@@ -1,18 +1,18 @@
-import { useState } from "react";
-import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
-import FormRow from "../components/FormRow";
-import { useGlobalContext } from "../context";
-import useLocalState from "../utils/localState";
+import { useState } from 'react';
+import styled from 'styled-components';
+import { Link, useNavigate } from 'react-router-dom';
+import FormRow from '../components/FormRow';
+import { useGlobalContext } from '../context';
+import useLocalState from '../utils/localState';
 
-import axios from "axios";
+import axios from 'axios';
 
 function Login() {
     const { saveUser } = useGlobalContext();
     const history = useNavigate();
     const [values, setValues] = useState({
-        email: "",
-        password: "",
+        email: '',
+        password: '',
     });
     const { alert, showAlert, loading, setLoading, hideAlert } =
         useLocalState();
@@ -27,15 +27,22 @@ function Login() {
         const { email, password } = values;
         const loginUser = { email, password };
         try {
-            const { data } = await axios.post(`/api/v1/auth/login`, loginUser);
-            setValues({ name: "", email: "", password: "" });
-            showAlert({
-                text: `Welcome, ${data.user.name}. Navigating to dashboard...`,
-                type: "success",
-            });
-            setLoading(false);
-            saveUser(data.user);
-            history.push("/dashboard");
+            const response = await axios.post(`/api/v1/auth/login`, loginUser);
+            const { data } = response;
+
+            if (data) {
+                setValues({ name: '', email: '', password: '' });
+                showAlert({
+                    text: `Welcome, ${data.user.name}. Navigating to dashboard...`,
+                    type: 'success',
+                });
+                setLoading(false);
+                saveUser(data.user);
+                history.push('/dashboard');
+            } else {
+                showAlert({ text: 'No data received from the server.' });
+                setLoading(false);
+            }
         } catch (error) {
             showAlert({ text: error.response.data.msg });
             setLoading(false);
@@ -51,7 +58,7 @@ function Login() {
                     </div>
                 )}
                 <form
-                    className={loading ? "form form-loading" : "form"}
+                    className={loading ? 'form form-loading' : 'form'}
                     onSubmit={onSubmit}
                 >
                     {/* single form row */}
@@ -75,7 +82,7 @@ function Login() {
                         className='btn btn-block'
                         disabled={loading}
                     >
-                        {loading ? "Loading..." : "Login"}
+                        {loading ? 'Loading...' : 'Login'}
                     </button>
                     <p>
                         Don't have an account?
@@ -84,7 +91,7 @@ function Login() {
                         </Link>
                     </p>
                     <p>
-                        Forgot your password?{" "}
+                        Forgot your password?{' '}
                         <Link to='/forgot-password' className='reset-link'>
                             Reset Password
                         </Link>
