@@ -30,6 +30,7 @@ const register = async (req, res) => {
     });
 
     const origin = 'http://localhost:3000';
+    // const newOrigin = 'Add-production-url';
 
     await sendVerificationEmail({
         name: user.name,
