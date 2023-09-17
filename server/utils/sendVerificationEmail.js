@@ -6,11 +6,15 @@ const sendVerificationEmail = async ({
     verificationToken,
     origin,
 }) => {
-    const verifyEmail = `${origin}/user/verify-email?token=${verificationToken}&email=${email}`;
+    // TODO: Front-end
+    // const verifyEmail = `${origin}/user/verify-email?token=${verificationToken}&email=${email}`;
 
-    const message = `<p>Please confirm your email by clicking the following link :
-     <a href="${verifyEmail}">Verify Email</a> 
-     </p>`;
+    // const message = `<p>Please confirm your email by clicking the following link :
+    //  <a href="${verifyEmail}">Verify Email</a>
+    //   </p>`;
+
+    // Postman
+    const message = `Please confirm email with token : ${verificationToken}`;
 
     return sendEmail({
         to: email,
