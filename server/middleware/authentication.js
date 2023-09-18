@@ -1,5 +1,7 @@
 const customError = require('../errors');
 const { isTokenValid } = require('../utils');
+const Token = require('../models/Token');
+const { attachCookiesToResponse } = require('../utils');
 
 const authenticateUser = async (req, res, next) => {
     const { refreshToken, accessToken } = req.signedCookies;
@@ -10,6 +12,28 @@ const authenticateUser = async (req, res, next) => {
             req.user = payload.user;
             return next();
         }
+
+        const payload = isTokenValid(refreshToken);
+
+        const existingToken = await Token.findOne({
+            user: payload.user.userId,
+            refreshToken: payload.refreshToken,
+        });
+
+        if (!existingToken || !existingToken?.isValid) {
+            throw new customError.UnauthenticatedError(
+                'Authentication Invalid'
+            );
+        }
+        // attach cookies
+        attachCookiesToResponse({
+            res,
+            user: payload.user,
+            refreshToken: existingToken.refreshToken,
+        });
+
+        req.user = payload.user;
+        next();
     } catch (error) {
         throw new customError.UnauthenticatedError('Authentication Invalid');
     }
