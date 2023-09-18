@@ -1,11 +1,11 @@
-const Order = require("../models/Order");
-const Product = require("../models/Product");
-const { StatusCodes } = require("http-status-codes");
-const CustomError = require("../errors");
-const { checkPermissions } = require("../utils");
+const Order = require('../models/Order');
+const Product = require('../models/Product');
+const { StatusCodes } = require('http-status-codes');
+const CustomError = require('../errors');
+const { checkPermissions } = require('../utils');
 
 const fakeStripeAPI = async ({ amount, currency }) => {
-    const client_secret = "RandomValue123";
+    const client_secret = 'RandomValue123';
     return { client_secret, amount };
 };
 
@@ -13,11 +13,11 @@ const createOrder = async (req, res) => {
     const { items: cartItems, tax, shippingFee } = req.body;
 
     if (!cartItems || cartItems.length < 1) {
-        throw new CustomError.BadRequestError("No cart items provided");
+        throw new CustomError.BadRequestError('No cart items provided');
     }
     if (!tax || !shippingFee) {
         throw new CustomError.BadRequestError(
-            "Please provide tax and shipping fee"
+            'Please provide tax and shipping fee'
         );
     }
 
@@ -50,7 +50,7 @@ const createOrder = async (req, res) => {
     // get client secret with mock stripe payment
     const paymentIntent = await fakeStripeAPI({
         amount: total,
-        currency: "usd",
+        currency: 'usd',
     });
 
     const order = await Order.create({
@@ -106,7 +106,7 @@ const updateOrder = async (req, res) => {
     checkPermissions(req.user, order.user);
 
     order.paymentIntentId = paymentIntentId;
-    order.status = "paid";
+    order.status = 'paid';
 
     await order.save();
     res.status(StatusCodes.OK).json({ order });

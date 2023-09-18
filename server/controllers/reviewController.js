@@ -1,8 +1,8 @@
-const Review = require("../models/Review");
-const Product = require("../models/Product");
-const { StatusCodes } = require("http-status-codes");
-const CustomError = require("../errors");
-const { checkPermissions } = require("../utils");
+const Review = require('../models/Review');
+const Product = require('../models/Product');
+const { StatusCodes } = require('http-status-codes');
+const CustomError = require('../errors');
+const { checkPermissions } = require('../utils');
 
 const createReview = async (req, res) => {
     const { product: productId } = req.body;
@@ -17,7 +17,7 @@ const createReview = async (req, res) => {
     });
     if (alreadySubmitted) {
         throw new CustomError.BadRequestError(
-            "Already submitted review for this product"
+            'Already submitted review for this product'
         );
     }
 
@@ -30,8 +30,8 @@ const createReview = async (req, res) => {
 
 const getAllReviews = async (req, res) => {
     const reviews = await Review.find({}).populate({
-        path: "product",
-        select: "name company price",
+        path: 'product',
+        select: 'name company price',
     });
     res.status(StatusCodes.OK).json({ reviews, count: reviews.length });
 };
@@ -73,7 +73,7 @@ const deleteReview = async (req, res) => {
     checkPermissions(req.user, review.user);
     await review.deleteOne();
 
-    res.status(StatusCodes.OK).json({ msg: "Successfully deleted review!" });
+    res.status(StatusCodes.OK).json({ msg: 'Successfully deleted review!' });
 };
 
 const getSingleProductReviews = async (req, res) => {
