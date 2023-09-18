@@ -134,4 +134,40 @@ const verifyEmail = async (req, res) => {
     res.status(StatusCodes.OK).json({ msg: 'Email Verified' });
 };
 
-module.exports = { register, login, logout, verifyEmail };
+const forgotPassword = async (req, res) => {
+    const { email } = req.body;
+    if (!email) {
+        throw new CustomError.BadRequestError('Please provide valid email');
+    }
+
+    const user = await User.findOne({ email });
+
+    if (user) {
+        const passwordToken = crypto.randomBytes(70).toString('hex');
+        // send email front-end
+
+        const fiveMinutes = 1000 * 60 * 5;
+        const passwordTokenExpirationDate = new Date(Date.now() + fiveMinutes);
+
+        user.passwordToken = passwordToken;
+        user.passwordTokenExpirationDate = passwordTokenExpirationDate;
+        await user.save();
+    }
+
+    // msg is for front-end + postman
+    res.status(StatusCodes.OK).json({
+        msg: 'Please check your email for reset password link',
+    });
+};
+const resetPassword = async (req, res) => {
+    res.send('reset password');
+};
+
+module.exports = {
+    register,
+    login,
+    logout,
+    verifyEmail,
+    forgotPassword,
+    resetPassword,
+};
