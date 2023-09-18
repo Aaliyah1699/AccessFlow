@@ -1,6 +1,6 @@
 # AccessFlow
 
-AuthFlow is a powerful backend API that provides essential authentication and user management functionalities. It is designed to seamlessly connect with frontend applications and offers robust security features. AuthFlow is built using Node.js, Express, and MongoDB, making it a reliable choice for managing user data and authentication in your application.
+AccessFlow is a powerful backend API that provides essential authentication and user management functionalities. It is designed to seamlessly connect with frontend applications and offers robust security features. AuthFlow is built using Node.js, Express, and MongoDB, making it a reliable choice for managing user data and authentication in your application.
 
 ## Technologies Used
 
