@@ -18,12 +18,19 @@ Ethereal Mail (for testing)
 AuthFlow offers a wide range of features to enhance your application's authentication and user management:
 
 **User Authentication**: Secure user registration, login, and logout.
+
 **Email Verification**: Verify user email addresses to ensure authenticity.
+
 **Password Management**: Forgot password and reset password functionality for user convenience.
+
 **Custom Errors**: Custom error handling and authentication middleware for added security.
+
 **Cookie Management**: Easily send and manage multiple cookies for improved user experience.
+
 **Token-based Authentication**: Implement token-based authentication for users.
+
 **User Management**: CRUD operations for users, products, orders, and reviews.
+
 **Controller, Schema, and Routes**: Well-structured controllers, schemas, and routes for organized code.
 
 ## Email Validation
